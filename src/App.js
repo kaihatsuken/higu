@@ -25,14 +25,14 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 const App = (() => {
-  const channelUrl = `https://discordapp.com/api/v6/channels/1051197137049878549/messages`;
+  /* const channelUrl = `https://discordapp.com/api/v6/channels/1051197137049878549/messages`;
   React.useEffect(() => {
     getMessages(channelUrl).then(messages => {
       messages.forEach(message => {
         console.log(message.content);
       });
     })
-  })
+  }) */
 
   return (
     <div>
@@ -93,6 +93,14 @@ const Merch = (() => {
 })
 
 const Art = (() => {
+  const ids = "1578149241498705921,1583369960612859906,1579597819249577985,1577611069614276608,1576631891981049856,1572250524375814148,1564040867891286016,1561122613296242688,1560363059373555712,1551421172843270150"
+
+  React.useEffect(() => {
+    getTweets(ids).then(data => {
+      console.log(data)
+    })
+  })
+
   return (
     <div>Art Gallery</div>
   )
@@ -109,7 +117,17 @@ const NoMatch = (() => {
   );
 })
 
-async function getMessages(channelUrl) {
+async function getTweets(ids) {
+  const baseUrl = 'https://twitter-api.herokuapp.com/twitter';
+  const headers = {
+    'Access-Control-Allow-Origin': '*'
+  };
+  const response = await fetch(`${baseUrl}?ids=${ids}`, {headers});
+  const data = await response.json();
+  return data;
+}
+
+/* async function getMessages(channelUrl) {
   let messages = [];
   let beforeId = null;
   let hasMore = true;
@@ -118,8 +136,10 @@ async function getMessages(channelUrl) {
     const queryString = beforeId ? `?before=${beforeId}` : '';
     const response = await fetch(channelUrl + queryString, {
       headers: {
-        'Authorization': `Bot 1056954755693412434`,
+        'Authorization': `Bot `,
+        'Access-Control-Allow-Origin':'*'
       },
+      mode: 'cors',
     });
     const data = await response.json();
     messages = messages.concat(data);
@@ -128,6 +148,7 @@ async function getMessages(channelUrl) {
   }
 
   return messages;
-}
+} */
+
 
 export default App;
