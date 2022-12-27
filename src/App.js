@@ -83,7 +83,7 @@ const Home = (() => {
       </div>
 
       <div className='review'>
-        <img src='/five-star.png'/>
+        <img src='/five-star.png' alt=''/>
         <p>5/5</p>
         <p className='italic'>Definitely a must watch</p>
       </div>
