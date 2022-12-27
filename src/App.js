@@ -1,6 +1,7 @@
 import './App.css';
 import * as React from "react";
 import {Routes, Route, Outlet, Link} from 'react-router-dom'
+import messages from'./messages.json'
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -61,13 +62,44 @@ const Layout = (() => {
 })
 
 const Home = (() => {
+  const messagesArray = []
+
+  for (let i = 0; i < messages.length; i++) {
+    const message = messages[i];
+    messagesArray.push(<Message content={message.message} author={message.author} float={i % 2 === 0 ? 'left' : 'right'}/>)
+  }
+
   return (
-    <div className="hero-image">
-      <div className="hero-text">
-        <h1>I am John Doe</h1>
-        <p>And I'm a Photographer</p>
-        <button>Hire me</button>
+    <>
+      <div className="hero-image">
+        <div className="hero-text">
+          <h1>higuVT</h1>
+          <p>higuVT</p>
+        </div>
       </div>
+
+      <div className='messages'>
+        {messagesArray}
+      </div>
+
+      <div className='review'>
+        <img src='/five-star.png'/>
+        <p>5/5</p>
+        <p className='italic'>Definitely a must watch</p>
+      </div>
+    </>
+  )
+})
+
+const Message = (({content, author, float}) => {
+  const className = `quote-${float}`
+
+  return (
+    <div className={className}>
+      <blockquote style={float={float}}>
+        {content}
+      </blockquote>
+      <cite style={float={float}}>{author}</cite>
     </div>
   )
 })
@@ -103,7 +135,7 @@ const Gallery = (() => {
         setGallery(art)
       })
     }
-  }, [gallery])
+  })
 
   return (
     <div key={'galery'} className="gallery">
