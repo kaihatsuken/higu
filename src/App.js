@@ -167,7 +167,7 @@ const NoMatch = (() => {
 })
 
 async function getTweets(ids) {
-  const baseUrl = 'http://127.0.0.1:5000/twitter';
+  const baseUrl = 'https://twitter-api.herokuapp.com/twitter';
   const headers = {
     'Access-Control-Allow-Origin': '*'
   };
