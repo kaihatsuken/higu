@@ -67,3 +67,41 @@ nav a {
   background-color: #555;
   color: white;
 }
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: #acd5fd;
+  padding-top: 10px;
+}
+
+.artCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+  margin: 15px;
+}
+
+@media screen and (max-width: 950px) {
+  .artCard {
+    width: 45%;
+    margin: 15px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .gallery {
+    justify-content: center;
+  }
+  
+  .artCard {
+    width: 50%;
+    margin: 15px;
+  }
+}
+
+.artCard img, p {
+  max-width: 300px;
+}

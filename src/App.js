@@ -4,7 +4,6 @@ import {Routes, Route, Outlet, Link} from 'react-router-dom'
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -21,25 +20,16 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+initializeApp(firebaseConfig);
 
 const App = (() => {
-  /* const channelUrl = `https://discordapp.com/api/v6/channels/1051197137049878549/messages`;
-  React.useEffect(() => {
-    getMessages(channelUrl).then(messages => {
-      messages.forEach(message => {
-        console.log(message.content);
-      });
-    })
-  }) */
 
   return (
     <div>
       <Routes>
         <Route path='/' element={<Layout/>}>
           <Route index element={<Home/>}/>
-          <Route path='art' element={<Art/>}/>
+          <Route path='art' element={<Gallery/>}/>
           <Route path='merch' element={<Merch/>}/>
 
           <Route path="*" element={<NoMatch />} />
@@ -92,17 +82,44 @@ const Merch = (() => {
   )
 })
 
-const Art = (() => {
+const Gallery = (() => {
+  const [gallery, setGallery] = React.useState(null)
   const ids = "1578149241498705921,1583369960612859906,1579597819249577985,1577611069614276608,1576631891981049856,1572250524375814148,1564040867891286016,1561122613296242688,1560363059373555712,1551421172843270150"
+  const art = []
 
   React.useEffect(() => {
-    getTweets(ids).then(data => {
-      console.log(data)
-    })
-  })
+    if(!gallery){
+      getTweets(ids).then(data => {
+        console.log(data)
+        let tweets = data.tweets.data
+        
+        for (let i = 0; i < tweets.length; i++) {
+          let tweet = tweets[i];
+          let url = data.tweets.includes.media[i].url
+          art.push(<Art text={tweet.text} img={url} id={tweet.id} key={tweet.id}/>)
+        }
+  
+        console.log(art)
+        setGallery(art)
+      })
+    }
+  }, [gallery])
 
   return (
-    <div>Art Gallery</div>
+    <div key={'galery'} className="gallery">
+      {gallery}
+    </div>
+  )
+})
+
+const Art = (({text, img, id}) => {
+  let originalTweet = `https://twitter.com/higu_VT/status/${id}`
+  return (
+    <div className='artCard'>
+      <img src={img} alt=''/>
+      <p>{text}</p>
+      <a href={originalTweet}>Go to original tweet</a>
+    </div>
   )
 })
 
@@ -118,7 +135,7 @@ const NoMatch = (() => {
 })
 
 async function getTweets(ids) {
-  const baseUrl = 'https://twitter-api.herokuapp.com/twitter';
+  const baseUrl = 'http://127.0.0.1:5000/twitter';
   const headers = {
     'Access-Control-Allow-Origin': '*'
   };
@@ -126,29 +143,5 @@ async function getTweets(ids) {
   const data = await response.json();
   return data;
 }
-
-/* async function getMessages(channelUrl) {
-  let messages = [];
-  let beforeId = null;
-  let hasMore = true;
-
-  while (hasMore) {
-    const queryString = beforeId ? `?before=${beforeId}` : '';
-    const response = await fetch(channelUrl + queryString, {
-      headers: {
-        'Authorization': `Bot `,
-        'Access-Control-Allow-Origin':'*'
-      },
-      mode: 'cors',
-    });
-    const data = await response.json();
-    messages = messages.concat(data);
-    beforeId = data[data.length - 1].id;
-    hasMore = data.length === 100; // Discord API returns a maximum of 100 messages per request
-  }
-
-  return messages;
-} */
-
 
 export default App;
