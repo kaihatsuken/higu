@@ -55,7 +55,7 @@ const Layout = (() => {
       <Outlet />
 
       <footer>
-        <p>Credits</p>
+        <i class="fa-brands fa-twitch"></i>
       </footer>
     </div>
   )
@@ -73,8 +73,8 @@ const Home = (() => {
     <>
       <div className="hero-image">
         <div className="hero-text">
-          <h1>higuVT</h1>
-          <p>higuVT</p>
+          <h1>Happy Birthday Higu!!!</h1>
+          <p>From your community with &#128151;</p>
         </div>
       </div>
 
