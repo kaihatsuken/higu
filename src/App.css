@@ -12,12 +12,19 @@ header {
 
 footer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
   background-color: #303163;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   color: white;
+}
+
+.fa-brands {
+  color: white;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 nav {
@@ -67,6 +74,10 @@ nav a {
 .hero-text button:hover {
   background-color: #555;
   color: white;
+}
+
+.hero-text p {
+  max-width: none;
 }
 
 .gallery {

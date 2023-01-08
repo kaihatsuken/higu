@@ -55,7 +55,10 @@ const Layout = (() => {
       <Outlet />
 
       <footer>
-        <i class="fa-brands fa-twitch"></i>
+        <a href='https://www.twitch.tv/higuvt'><i class="fa-brands fa-twitch"></i></a>
+        <a href='https://twitter.com/higu_VT'><i class="fa-brands fa-twitter"></i></a>
+        <a href='https://www.tiktok.com/@higu_vt'><i class="fa-brands fa-tiktok"></i></a>
+        <a href='https://discord.gg/SHw8CGYQZq'><i class="fa-brands fa-discord"></i></a>
       </footer>
     </div>
   )
@@ -108,7 +111,8 @@ const Merch = (() => {
   return (
     <div className="hero-image">
       <div className="hero-text">
-        <h1>Maybe one day &#40;Prayge&#41;</h1>
+        <h1>Sike there's nothing here</h1>
+        <p>Maybe one day &#40;Prayge&#41;</p>
       </div>
     </div>
   )
